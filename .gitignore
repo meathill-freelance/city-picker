@@ -1,0 +1,10 @@
+# IDE
+.idea
+
+# repo
+node_modules
+
+# build
+css/
+dist/
+assets/city.json

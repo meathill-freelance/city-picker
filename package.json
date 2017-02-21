@@ -1,0 +1,37 @@
+{
+  "name": "city-picker",
+  "version": "1.0.0",
+  "description": "a city picker for 天气宝",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:js": "webpack",
+    "watch:stylus": "stylus -w styl/screen.styl -o css/ --sourcemap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meathill-freelance/city-picker.git"
+  },
+  "keywords": [
+    "component",
+    "picker"
+  ],
+  "author": "Meathill <meathill@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meathill-freelance/city-picker/issues"
+  },
+  "homepage": "https://github.com/meathill-freelance/city-picker#readme",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-env": "^1.1.8",
+    "bootstrap": "^4.0.0-alpha.6",
+    "colors.css": "^2.3.0",
+    "handlebars": "^4.0.6",
+    "handlebars-loader": "^1.4.0",
+    "jquery": "^3.1.1",
+    "marked": "^0.3.6",
+    "webpack": "^2.2.1"
+  }
+}

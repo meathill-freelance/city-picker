@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>演示</title>
+  <meta name="viewport" content="width=device-width,user-scalable=no">
+
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/screen.css">
+  <link rel="stylesheet" href="css/sample.css">
+</head>
+<body>
+<div class="container">
+  <section id="readme">
+
+  </section>
+  <hr>
+  <section id="static-sample">
+    <h2>静态范例</h2>
+    <div class="sample-container">
+
+    </div>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary active">
+        <input type="radio" checked name="status" value="loading"> Loading
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="status" value="ready"> Ready
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="status" value="error"> Error
+      </label>
+    </div>
+  </section>
+  <section>
+    <h2>动态范例</h2>
+    <form>
+      <div class="form-group">
+        <label for="city">请点选</label>
+        <input class="form-control tqb-city-picker-input" id="city" placeholder="Click me!">
+      </div>
+    </form>
+  </section>
+</div>
+
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="dist/city-picker.bundle.js"></script>
+<script src="dist/dev.bundle.js" data-exclude></script>
+</body>
+</html>
