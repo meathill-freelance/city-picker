@@ -1,0 +1,45 @@
+.tqb-cp-list
+  border-color = rgb(205,205,205)
+  active-color = rgb(219,246,252)
+
+  .label
+    background-color background-color
+    line-height 2.25em
+    padding 0 0 0 1.6em
+    margin 0
+    font-size 0.75em
+
+  .hot
+    ul
+      margin 0
+      padding 1em 0 1em 1em
+      overflow hidden
+
+      li
+        list-style none
+        display block
+        float left
+        width 30%
+        line-height 2.7em
+        border 1px solid border-color
+        border-radius 1.35em
+        text-align center
+        margin 0 .25em .25em 0
+
+        &.select
+          border none
+          background-color active-color
+
+  .list
+    padding-left 0
+
+    li:not(.label)
+      list-style none
+      margin-left 1em
+      line-height 3em
+
+      + li:not(.label)
+        border-top 1px solid border-color
+
+      &.select
+        background-color active-color

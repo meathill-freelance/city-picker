@@ -2,6 +2,7 @@
  * Created by realm on 2017/2/21.
  */
 const path = require('path');
+const RemoveSourceMapUrlWebpackPlugin = require('@rbarilani/remove-source-map-url-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -9,7 +10,8 @@ module.exports = {
     dev: './app/dev.js'
   },
   output: {
-    filename: './dist/[name].bundle.js'
+    path: 'dist',
+    filename: '[name].bundle.js'
   },
   module: {
     loaders: [
@@ -24,6 +26,11 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new RemoveSourceMapUrlWebpackPlugin({
+      test: /\.bundle\.js$/
+    })
+  ],
   watch: true,
   watchOptions: {
     ignored: /node_modules|dist/,

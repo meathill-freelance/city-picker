@@ -1,0 +1,20 @@
+<div class="tqb-cp-list">
+  <div class="hot">
+    <h4 class="label">热门</h4>
+    <ul>
+      {{#each hot}}
+        {{> ./item}}
+      {{/each}}
+    </ul>
+  </div>
+  <ul class="list">
+    {{#each list}}
+      {{> ./item}}
+    {{/each}}
+  </ul>
+</div>
+<ul class="vocabulary">
+  {{#each vocabulary}}
+    <li>{{.}}</li>
+  {{/each}}
+</ul>

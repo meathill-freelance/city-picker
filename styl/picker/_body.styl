@@ -7,13 +7,25 @@
   bottom 0
   display flex
   flex-direction column
+  font-size root-font-size
+  transition all .2s
+  z-index 1024
 
   &.static
-    position static
+    position relative
     max-width 375px
-    height 400px
+    height 600px
     border 1px solid silver
+
+  &.out
+    transform translate3d(0,2em,0)
+    opacity 0
+
+  &.hide
+    display none !important
 
   @import "_header.styl"
   @import "_container.styl"
   @import "_list.styl"
+  @import "_vocabulary.styl"
+  @import "_error.styl"

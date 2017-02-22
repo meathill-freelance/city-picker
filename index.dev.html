@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
   <meta charset="UTF-8">
-  <title>演示</title>
+  <title>城市选择器</title>
   <meta name="viewport" content="width=device-width,user-scalable=no">
 
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -37,13 +37,15 @@
     <form>
       <div class="form-group">
         <label for="city">请点选</label>
-        <input class="form-control tqb-city-picker-input" id="city" placeholder="Click me!">
+        <input class="form-control tqb-city-picker-input" id="city" placeholder="Click me!" name="city">
       </div>
     </form>
   </section>
 </div>
 
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/tether/dist/js/tether.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="dist/city-picker.bundle.js"></script>
 <script src="dist/dev.bundle.js" data-exclude></script>
 </body>
