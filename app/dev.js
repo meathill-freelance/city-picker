@@ -3,6 +3,7 @@
  */
 
 import marked from 'marked';
+import _ from 'underscore';
 import CityPicker from './city-picker';
 import template from '../template/body.hbs';
 import list from '../template/list.hbs';
@@ -24,6 +25,7 @@ fetch('./README.md')
 let staticSample = template({
   'static': true
 });
+let listHTML = list(CityPicker.format(_.clone(cities)));
 $('#static-sample')
   .find('.sample-container').html(staticSample)
     .end()
@@ -40,7 +42,7 @@ $('#static-sample')
       case 'ready':
         container
           .removeClass('loading')
-          .html(list(CityPicker.format(cities)));
+          .html(listHTML);
         break;
 
       case 'error':

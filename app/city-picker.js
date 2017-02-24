@@ -31,13 +31,14 @@ export default class CityPicker {
           .html(list(json));
         this.list = this.$el.find('.tqb-cp-list');
         this.header = this.$el.find('header');
+        this.$el.removeClass('loading');
       })
       .catch( err => {
         container.html(error(err));
       });
 
     let el = this.$el = $(template());
-    let container = this.$el.find('.tqb-cp-container');
+    let container = this.container = this.$el.find('.tqb-cp-container');
     el.appendTo(document.body);
     setTimeout( () => {
       el.removeClass('out');
@@ -54,16 +55,29 @@ export default class CityPicker {
         this.input.val(li.data('id'));
       })
       .on('click', '.vocabulary li', event => {
-        let char = event.currentTarget.innerHTML();
-        let offset = this.list.find('.label.' + char).offset();
-        this.list.scrollTop(offset.top);
+        let char = event.currentTarget.innerHTML;
+        let position = this.list.find(`.label.${char}`).position();
+        this.container.scrollTop(position.top);
+        console.log(char, position);
       })
       .on('click', '.tqb-cp-close-button', () => {
         this.hide();
       })
       .on('click', '.tqb-cp-search-button', event => {
         this.$el.toggleClass('search');
-        $(event.currentTarget).html(this.$el.hasClass('search') ? '取消' : '');
+      })
+      .on('click', '.tqb-cp-clear-button', () => {
+        this.$el.find('[type=search]').val('');
+      })
+      .on('change input', '[type=search]', event => {
+        let value = event.currentTarget.value;
+        if (value) {
+          this.list.find('.check').removeClass('check');
+          this.list.find('.list').addClass('searching');
+          this.list.find(`.${value},[data-py^=${value}]`).addClass('check');
+        } else {
+          this.list.find('.list').removeClass('searching');
+        }
       })
       .on('transitionend', ()=> {
         this.$el.toggleClass('hide', this.$el.hasClass('out'));

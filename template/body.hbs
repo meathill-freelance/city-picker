@@ -1,11 +1,15 @@
 <div class="tqb-city-picker loading {{#if static}}static{{else}}out{{/if}}">
   <header>
-    <button type="button" class="tqb-cp-close-button">&lt;</button>
+    <button type="button" class="tqb-cp-close-button"></button>
     <h3>选择城市</h3>
-    <button type="button" class="tqb-cp-search-button">搜索</button>
-    <input type="search" name="query">
-    <button type="button" class="tqb-cp-clear-button">&times;</button>
+    <button type="button" class="tqb-cp-search-button"></button>
   </header>
+  <div class="search">
+    <i class="search-icon"></i>
+    <input type="search" name="query" autofocus>
+    <button type="button" class="tqb-cp-clear-button">&times;</button>
+    <button type="button" class="tqb-cp-search-button">取消</button>
+  </div>
   <div class="tqb-cp-container loading">
     <p class="loading">加载中，请稍候</p>
   </div>

@@ -24,7 +24,16 @@
   &.hide
     display none !important
 
+  &.search
+    > header,
+    .vocabulary
+      display none
+
+    .search
+      display flex
+
   @import "_header.styl"
+  @import "_search.styl"
   @import "_container.styl"
   @import "_list.styl"
   @import "_vocabulary.styl"
