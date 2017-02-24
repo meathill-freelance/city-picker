@@ -9,18 +9,21 @@ import template from '../template/body.hbs';
 import list from '../template/list.hbs';
 import errorInfo from '../template/error.hbs';
 import cities from '../assets/city.json';
+import {DEBUG} from 'config';
 
-fetch('./README.md')
-  .then( response => {
-    if (response.ok) {
-      return response.text();
-    }
-    throw new Error('Network error');
-  })
-  .then( content => {
-    let html = marked(content);
-    $('#readme').html(html);
-  });
+if (DEBUG) {
+  fetch('./README.md')
+    .then( response => {
+      if (response.ok) {
+        return response.text();
+      }
+      throw new Error('Network error');
+    })
+    .then( content => {
+      let html = marked(content);
+      $('#readme').html(html);
+    });
+}
 
 let staticSample = template({
   'static': true

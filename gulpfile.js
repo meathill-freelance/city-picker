@@ -11,8 +11,13 @@ const rename = require('gulp-rename');
 const base64 = require('gulp-base64');
 const webpack = require('gulp-webpack');
 const uglify = require('gulp-uglify');
+const replace = require('gulp-replace');
+const event = require('event-stream');
 const del = require('del');
+const marked = require('marked');
 const DEST = 'build/';
+const DOC = 'docs/';
+const CDN = require('./cdn.json');
 
 let removeSourceMap = function (path) {
   return new Promise(resolve => {
@@ -35,6 +40,11 @@ let removeSourceMap = function (path) {
       })
     });
 };
+let webpackConfig = require('./webpack.config');
+webpackConfig.watch = false;
+webpackConfig.output.filename = '[name].min.js';
+webpackConfig.resolve.alias.DEBUG = false;
+
 gulp.task('sourcemap', () => {
   let path = ['./dist/city-picker.bundle.js', './dist/dev.bundle.js'];
   return Promise.all(path.map( path => {
@@ -43,7 +53,7 @@ gulp.task('sourcemap', () => {
 });
 
 gulp.task('clear', () => {
-  return del(DEST);
+  return del([DEST, DOC]);
 });
 
 gulp.task('stylus', () => {
@@ -59,15 +69,35 @@ gulp.task('stylus', () => {
 
 gulp.task('webpack', () => {
   return gulp.src('./app/main.js')
-    .pipe(webpack(require('./webpack.config')))
+    .pipe(webpack(webpackConfig))
     .pipe(uglify())
-    .pipe(rename('tqb-city-picker.min.js'))
     .pipe(gulp.dest(DEST + 'js/'));
+});
+
+gulp.task('html', () => {
+  let readme = marked(fs.readFileSync('./README.md', 'utf8'));
+  return gulp.src('./index.dev.html')
+    .pipe(replace(/node_modules\/([\w]+)\/dist\//g, (match, repo) => {
+      return CDN[repo];
+    }))
+    .pipe(replace('"dist/', '"js/'))
+    .pipe(replace('bundle.js', 'min.js'))
+    .pipe(replace('<!-- readme -->', readme))
+    .pipe(rename('index.html'))
+    .pipe(gulp.dest(DOC));
+});
+
+gulp.task('copy', () => {
+  return event.merge(
+    gulp.src('build/**').pipe(gulp.dest(DOC)),
+    gulp.src(['css/**', '!*.map']).pipe(gulp.dest(DOC + 'css/'))
+  );
 });
 
 gulp.task('default', callback => {
   sequence('clear',
-    ['stylus', 'webpack'],
+    ['stylus', 'webpack', 'html'],
+    'copy',
     callback
   );
 });
