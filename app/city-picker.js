@@ -32,8 +32,15 @@ export default class CityPicker {
         this.list = this.$el.find('.tqb-cp-list');
         this.header = this.$el.find('header');
         this.$el.removeClass('loading');
+        this.labels = this.list.find('.label').get().map(function (element) {
+          return {
+            label: element.innerHTML,
+            top: $(element).position().top
+          };
+        });
       })
       .catch( err => {
+        console.log(err);
         container.html(error(err));
       });
 
@@ -45,7 +52,7 @@ export default class CityPicker {
     });
   }
 
-  delegateEvents(options) {
+  delegateEvents() {
     this.$el
       .on('click', '.tqb-cp-list li:not(.label)', event => {
         this.$el.find('.select').removeClass('select');
@@ -63,7 +70,7 @@ export default class CityPicker {
       .on('click', '.tqb-cp-close-button', () => {
         this.hide();
       })
-      .on('click', '.tqb-cp-search-button', event => {
+      .on('click', '.tqb-cp-search-button', () => {
         this.$el.toggleClass('search');
       })
       .on('click', '.tqb-cp-clear-button', () => {
@@ -82,6 +89,49 @@ export default class CityPicker {
       .on('transitionend', ()=> {
         this.$el.toggleClass('hide', this.$el.hasClass('out'));
       });
+    this.$el.find('.tqb-cp-container').on('scroll', event => {
+        let scrollTop = event.currentTarget.scrollTop;
+        let current;
+        if (scrollTop < this.labels[1]) {
+          this.removeLabel();
+          return;
+        }
+        for (let i = 1, len = this.labels.length; i < len; i++) {
+          if (scrollTop > this.labels[i].top) {
+            current = i;
+          } else if (current) {
+            this.addLabel(this.labels[current].label);
+            return;
+          }
+        }
+      })
+  }
+
+  setValue(value) {
+    this.$el.find(`li[data-id="${value}"]`).addClass('select');
+  }
+
+  show() {
+    this.$el
+      .removeClass('hide');
+    setTimeout(() => {
+      this.$el.removeClass('out');
+    })
+  }
+
+  hide() {
+    this.$el.addClass('out');
+  }
+
+  addLabel(label) {
+    this.container.children('header')
+      .addClass('show')
+      .text(label);
+  }
+
+  removeLabel() {
+    this.container.children('header')
+      .removeClass('show');
   }
 
   static format(json) {
@@ -106,6 +156,7 @@ export default class CityPicker {
         result.list.splice(i, 0, {
           capital: capital.toUpperCase()
         });
+        len += 1;
         i += 1;
       }
       vocabulary[capital.toUpperCase()] = 0;
@@ -132,22 +183,6 @@ export default class CityPicker {
       url += options.params;
     }
     return url
-  }
-
-  setValue(value) {
-    this.$el.find(`li[data-id="${value}"]`).addClass('select');
-  }
-
-  show() {
-    this.$el
-      .removeClass('hide');
-    setTimeout(() => {
-      this.$el.removeClass('out');
-    })
-  }
-
-  hide() {
-    this.$el.addClass('out');
   }
 }
 
