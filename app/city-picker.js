@@ -60,6 +60,7 @@ export default class CityPicker {
         li.toggleClass('select');
         this.target.val(li.text());
         this.input.val(li.data('id'));
+        this.hide();
       })
       .on('click', '.vocabulary li', event => {
         let char = event.currentTarget.innerHTML;

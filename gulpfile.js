@@ -40,10 +40,6 @@ let removeSourceMap = function (path) {
       })
     });
 };
-let webpackConfig = require('./webpack.config');
-webpackConfig.watch = false;
-webpackConfig.output.filename = '[name].min.js';
-webpackConfig.resolve.alias.DEBUG = false;
 
 gulp.task('sourcemap', () => {
   let path = ['./dist/city-picker.bundle.js', './dist/dev.bundle.js'];
@@ -69,7 +65,7 @@ gulp.task('stylus', () => {
 
 gulp.task('webpack', () => {
   return gulp.src('./app/main.js')
-    .pipe(webpack(webpackConfig))
+    .pipe(webpack(require('./webpack.config.build')))
     .pipe(uglify())
     .pipe(gulp.dest(DEST + 'js/'));
 });
@@ -82,6 +78,8 @@ gulp.task('html', () => {
     }))
     .pipe(replace('"dist/', '"js/'))
     .pipe(replace('bundle.js', 'min.js'))
+    .pipe(replace('screen.css', 'tqb-city-picker.min.css'))
+    .pipe(replace(/<section id="static-sample">[\S\s]+?<\/section>/, ''))
     .pipe(replace('<!-- readme -->', readme))
     .pipe(rename('index.html'))
     .pipe(gulp.dest(DOC));
@@ -90,7 +88,8 @@ gulp.task('html', () => {
 gulp.task('copy', () => {
   return event.merge(
     gulp.src('build/**').pipe(gulp.dest(DOC)),
-    gulp.src(['css/**', '!*.map']).pipe(gulp.dest(DOC + 'css/'))
+    gulp.src(['css/sample.css']).pipe(gulp.dest(DOC + 'css/')),
+    gulp.src('assets/*.json').pipe(gulp.dest(DOC + 'assets'))
   );
 });
 

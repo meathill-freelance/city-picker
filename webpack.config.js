@@ -36,9 +36,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      config: {
-        DEBUG: true
-      }
+      config: path.resolve(__dirname, './config/dev.js')
     }
   }
 };
