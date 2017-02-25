@@ -53,6 +53,7 @@ export default class CityPicker {
   }
 
   delegateEvents() {
+    let self = this;
     this.$el
       .on('click', '.tqb-cp-list li:not(.label)', event => {
         this.$el.find('.select').removeClass('select');
@@ -64,9 +65,21 @@ export default class CityPicker {
       })
       .on('click', '.vocabulary li', event => {
         let char = event.currentTarget.innerHTML;
-        let position = this.list.find(`.label.${char}`).position();
-        this.container.scrollTop(position.top);
-        console.log(char, position);
+        this.scrollTo(char);
+      })
+      .on('touchstart', '.vocabulary', function () {
+        let vocabulary = $(this);
+        $('body').one('touchend', () => {
+          vocabulary.off('touchmove');
+        });
+        vocabulary.on('touchmove', function (event) {
+          let location = event.originalEvent.changedTouches[0];
+          let node = document.elementFromPoint(location.clientX, location.clientY);
+          if (this.contains(node)) {
+            let char = node.innerHTML;
+            self.scrollTo(char);
+          }
+        });
       })
       .on('click', '.tqb-cp-close-button', () => {
         this.hide();
@@ -106,6 +119,11 @@ export default class CityPicker {
           }
         }
       })
+  }
+
+  scrollTo(char) {
+    let position = this.list.find(`.label.${char}`).position();
+    this.container.scrollTop(position.top);
   }
 
   setValue(value) {
