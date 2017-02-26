@@ -12,8 +12,31 @@
 <body>
 <div class="container">
   <section id="readme">
-    <h1 id="city-picker">city-picker</h1>
-<p>A city picker for 天气宝</p>
+    <h1 id="-city-picker">天气宝 城市选择组件 City Picker</h1>
+<p>A city picker component for 天气宝</p>
+<p>这是供天气宝使用的日期选择组件，用在移动设备上。</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li><a href="https://jquery.com">jQuery</a> &gt;=3.1.1</li>
+<li>Mobile Devices</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>本插件会自动初始化页面中含有 <code>.tqb-city-picker-input</code> 样式的标签，并将其设置为 <code>readonly</code>。使用时只需要引用响应的 CSS、JS 文件即可。</p>
+<pre><code class="lang-html">&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1,user-scalable=no&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;path/to/tqb-city-picker.min.css&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;your/own/css/css.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;input type=&quot;text&quot; class=&quot;tqb-city-picker-input&quot;&gt;
+&lt;script src=&quot;path/to/jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/tqb-date-picker.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/your/own/js/js.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
 
   </section>
   <hr>
