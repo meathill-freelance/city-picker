@@ -73,7 +73,7 @@ gulp.task('webpack', () => {
 gulp.task('html', () => {
   let readme = marked(fs.readFileSync('./README.md', 'utf8'));
   return gulp.src('./index.dev.html')
-    .pipe(replace(/node_modules\/([\w]+)\/dist\//g, (match, repo) => {
+    .pipe(replace(/node_modules\/([\w]+)\/(dist\/)?/g, (match, repo) => {
       return CDN[repo];
     }))
     .pipe(replace('"dist/', '"js/'))
@@ -81,6 +81,7 @@ gulp.task('html', () => {
     .pipe(replace('screen.css', 'tqb-city-picker.min.css'))
     .pipe(replace(/<section id="static-sample">[\S\s]+?<\/section>/, ''))
     .pipe(replace('<!-- readme -->', readme))
+    .pipe(replace('lang-html', 'lang-html language-html'))
     .pipe(rename('index.html'))
     .pipe(gulp.dest(DOC));
 });
