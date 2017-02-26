@@ -18,13 +18,10 @@ export default class CityPicker {
 
   createElement(options) {
     let url = CityPicker.getDataAPI(options);
-    fetch(url)
-      .then( response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error('Network error');
-      })
+    $.get({
+      url: url,
+      dataType: 'json'
+    })
       .then( json => {
         json = CityPicker.format(json);
         container.removeClass('loading')

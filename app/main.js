@@ -12,7 +12,7 @@ $('body').on('click', '.tqb-city-picker-input', event => {
     picker.show();
     return;
   }
-  data.show = true
+  data.show = true;
   picker = new CityPicker(target, data);
   target.data('city-picker', picker);
   target.blur();
