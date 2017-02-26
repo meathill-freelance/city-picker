@@ -8,6 +8,7 @@ $('body').on('click', '.tqb-city-picker-input', event => {
   let target = $(event.currentTarget);
   let data = target.data();
   let picker = data.cityPicker;
+  target.blur();
   if (picker) {
     picker.show();
     return;
@@ -15,7 +16,6 @@ $('body').on('click', '.tqb-city-picker-input', event => {
   data.show = true;
   picker = new CityPicker(target, data);
   target.data('city-picker', picker);
-  target.blur();
 });
 
 $('.tqb-city-picker-input').prop('readonly', true);
