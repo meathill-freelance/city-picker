@@ -17,3 +17,5 @@ $('body').on('click', '.tqb-city-picker-input', event => {
   target.data('city-picker', picker);
   target.blur();
 });
+
+$('.tqb-city-picker-input').prop('readonly', true);
