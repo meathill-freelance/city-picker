@@ -83,6 +83,11 @@ export default class CityPicker {
       })
       .on('click', '.tqb-cp-search-button', () => {
         this.$el.toggleClass('search');
+        if (this.$el.hasClass('search')) {
+          this.$el.find('[type=search]').focus();
+        } else {
+          this.list.find('.list').removeClass('searching');
+        }
       })
       .on('click', '.tqb-cp-clear-button', () => {
         this.$el.find('[type=search]').val('');
