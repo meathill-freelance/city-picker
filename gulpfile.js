@@ -81,6 +81,7 @@ gulp.task('html', () => {
     .pipe(replace('screen.css', 'tqb-city-picker.min.css'))
     .pipe(replace(/<section id="static-sample">[\S\s]+?<\/section>/, ''))
     .pipe(replace('<!-- readme -->', readme))
+    .pipe(replace('<table>', '<table class="table">'))
     .pipe(replace('lang-html', 'lang-html language-html'))
     .pipe(rename('index.html'))
     .pipe(gulp.dest(DOC));

@@ -23,6 +23,26 @@
 </ul>
 <h2 id="-installation">使用 Installation</h2>
 <p>本插件会自动初始化页面中含有 <code>.tqb-city-picker-input</code> 样式的标签，并将其设置为 <code>readonly</code>。使用时只需要引用响应的 CSS、JS 文件即可。</p>
+<p>本插件会从目标 <code>&lt;input&gt;</code> 的 <code>data-*</code> 属性取初始化数据，目前支持以下两个参数：</p>
+<table class="table">
+<thead>
+<tr>
+<th>参数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>取城市数据的接口地址，默认是当前页面的 <code>./assets/city.json</code></td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>传给接口的参数，会直接连在 <code>url</code> 的后面</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-">范例</h3>
 <pre><code class="lang-html language-html">&lt;!doctype html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -32,7 +52,7 @@
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;input type=&quot;text&quot; class=&quot;tqb-city-picker-input&quot;&gt;
+&lt;input type=&quot;text&quot; class=&quot;tqb-city-picker-input&quot; data-url=&quot;http://your.domain.com/path/to/city/api/&quot; data-params=&quot;some=1&amp;thing=2&quot;&gt;
 &lt;script src=&quot;path/to/jquery.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;path/to/tqb-date-picker.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;path/to/your/own/js/js.js&quot;&gt;&lt;/script&gt;

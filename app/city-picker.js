@@ -203,7 +203,7 @@ export default class CityPicker {
   static getDataAPI(options) {
     let url = options.url || './assets/city.json';
     if ('params' in options) {
-      url += options.params;
+      url += '?' + options.params;
     }
     return url
   }
