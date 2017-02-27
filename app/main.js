@@ -19,10 +19,14 @@ $('body').on('click', '.tqb-city-picker-input', event => {
 });
 
 $('.tqb-city-picker-input').prop('readonly', true);
+window.TQBCityPicker = CityPicker;
 
-if (/micromessenger/i.test(navigator.userAgent)) {
+if (/micromessenger/i.test(navigator.userAgent) && !('FastClick' in window)) {
   let script = document.createElement('script');
   script.async = true;
   script.src = '//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js';
+  script.onload = () => {
+    FastClick.attach(document.body);
+  };
   document.body.appendChild(script);
 }
