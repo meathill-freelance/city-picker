@@ -42,7 +42,7 @@ let removeSourceMap = function (path) {
 };
 
 gulp.task('sourcemap', () => {
-  let path = ['./dist/city-picker.bundle.js', './dist/dev.bundle.js'];
+  let path = ['./dist/tqb-city-picker.bundle.js', './dist/dev.bundle.js'];
   return Promise.all(path.map( path => {
     return removeSourceMap(path)
   }));

@@ -24,11 +24,13 @@ export default class CityPicker {
     })
       .then( json => {
         json = CityPicker.format(json);
+        let html = list(json).split('<!-- split -->');
         container.removeClass('loading')
-          .html(list(json));
+          .html(html[0]);
+        this.$el.removeClass('loading')
+          .append(html[1]);
         this.list = this.$el.find('.tqb-cp-list');
-        this.header = this.$el.find('header');
-        this.$el.removeClass('loading');
+        this.capitalHeader = this.$el.find('.capital-header');
         this.labels = this.list.find('.label').get().map(function (element) {
           return {
             label: element.innerHTML,
@@ -106,21 +108,21 @@ export default class CityPicker {
         this.$el.toggleClass('hide', this.$el.hasClass('out'));
       });
     this.$el.find('.tqb-cp-container').on('scroll', event => {
-        let scrollTop = event.currentTarget.scrollTop;
-        let current;
-        if (scrollTop < this.labels[1]) {
-          this.removeLabel();
+      let scrollTop = event.currentTarget.scrollTop;
+      let current;
+      if (scrollTop < this.labels[1].top) {
+        this.removeLabel();
+        return;
+      }
+      for (let i = 1, len = this.labels.length; i < len; i++) {
+        if (scrollTop > this.labels[i].top) {
+          current = i;
+        } else if (current) {
+          this.addLabel(this.labels[current].label);
           return;
         }
-        for (let i = 1, len = this.labels.length; i < len; i++) {
-          if (scrollTop > this.labels[i].top) {
-            current = i;
-          } else if (current) {
-            this.addLabel(this.labels[current].label);
-            return;
-          }
-        }
-      })
+      }
+    });
   }
 
   scrollTo(char) {
@@ -145,13 +147,13 @@ export default class CityPicker {
   }
 
   addLabel(label) {
-    this.container.children('header')
+    this.capitalHeader
       .addClass('show')
       .text(label);
   }
 
   removeLabel() {
-    this.container.children('header')
+    this.capitalHeader
       .removeClass('show');
   }
 

@@ -12,13 +12,7 @@ import cities from '../assets/city.json';
 import {DEBUG} from 'config';
 
 if (DEBUG) {
-  fetch('./README.md')
-    .then( response => {
-      if (response.ok) {
-        return response.text();
-      }
-      throw new Error('Network error');
-    })
+  $.get('./README.md')
     .then( content => {
       let html = marked(content);
       $('#readme').html(html);
