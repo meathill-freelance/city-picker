@@ -99,7 +99,7 @@ export default class CityPicker {
         if (value) {
           this.list.find('.check').removeClass('check');
           this.list.find('.list').addClass('searching');
-          this.list.find(`.${value},[data-py^=${value}]`).addClass('check');
+          this.list.find(`[class*="${value}"]`).addClass('check');
         } else {
           this.list.find('.list').removeClass('searching');
         }
