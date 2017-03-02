@@ -31,21 +31,31 @@
           border-color active-color
           background-color active-color
 
-  .list
-    padding-left 0
-    margin-bottom 0
+.list
+  padding-left 0
+  margin-bottom 0
 
-    li:not(.label)
-      list-style none
-      margin-left 1em
-      line-height 3em
+  li:not(.label)
+    list-style none
+    margin 0 1em
+    line-height 3em
 
-      + li:not(.label)
-        border-top 1px solid border-color
+    + li:not(.label)
+      border-top 1px solid border-color
 
-      &.select
-        background-color active-color
+    &.select
+      background-color active-color
 
-    &.searching
-      li:not(.check)
+  &.searching
+    li
+      strong
+        color keyword-color
+
+      &.check
+        border none
+
+        ~ .check
+          border-top 1px solid border-color
+
+      &:not(.check)
         display none
