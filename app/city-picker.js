@@ -25,9 +25,9 @@ export default class CityPicker {
       .then( json => {
         json = CityPicker.format(json);
         let html = list(json).split('<!-- split -->');
-        container.removeClass('loading')
+        container.removeClass('tqb-cp-loading')
           .html(html[0]);
-        this.$el.removeClass('loading')
+        this.$el.removeClass('tqb-cp-loading')
           .append(html[1]);
         this.list = this.$el.find('.list');
         this.capitalHeader = this.$el.find('.capital-header');
