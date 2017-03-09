@@ -26,11 +26,11 @@ export default class CityPicker {
       .then( json => {
         json = CityPicker.format(json, options.hot);
         let html = list(json).split('<!-- split -->');
-        container.removeClass('loading')
+        container.removeClass('tqb-cp-loading')
           .html(html[0]);
-        this.$el.removeClass('loading')
+        this.$el.removeClass('tqb-cp-loading')
           .append(html[1]);
-        this.list = this.$el.find('.tqb-cp-list');
+        this.list = this.$el.find('.list');
         this.capitalHeader = this.$el.find('.capital-header');
         this.labels = this.list.find('.label').get().map(function (element) {
           return {
@@ -89,7 +89,7 @@ export default class CityPicker {
         if (this.$el.hasClass('search')) {
           this.$el.find('[type=search]').focus();
         } else {
-          this.list.find('.list').removeClass('searching');
+          this.list.removeClass('searching');
         }
       })
       .on('click', '.tqb-cp-clear-button', () => {
@@ -97,10 +97,16 @@ export default class CityPicker {
       })
       .on('change input', '[type=search]', event => {
         let value = event.currentTarget.value;
+        this.list.find('.check').removeClass('check')
+          .text( (i, text) => {
+            return text;
+          });
         if (value) {
-          this.list.find('.check').removeClass('check');
-          this.list.find('.list').addClass('searching');
-          this.list.find(`.${value},[data-py^=${value}]`).addClass('check');
+          this.list.addClass('searching');
+          this.list.find(`[class*="${value}"]`).addClass('check')
+            .html( (i, html) => {
+              return html.replace(value, `<strong>${value}</strong>`);
+            });
         } else {
           this.list.find('.list').removeClass('searching');
         }
