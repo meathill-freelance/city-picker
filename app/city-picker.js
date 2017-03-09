@@ -4,6 +4,7 @@ import error from '../template/error.hbs';
 
 export default class CityPicker {
   constructor(target, options) {
+    options.hot = options.hot || CityPicker.hotLength;
     this.target = target;
     this.input = CityPicker.generatePlaceholder(target);
     this.createElement(options);
@@ -23,7 +24,7 @@ export default class CityPicker {
       dataType: 'json'
     })
       .then( json => {
-        json = CityPicker.format(json);
+        json = CityPicker.format(json, options.hot);
         let html = list(json).split('<!-- split -->');
         container.removeClass('loading')
           .html(html[0]);
@@ -157,10 +158,10 @@ export default class CityPicker {
       .removeClass('show');
   }
 
-  static format(json) {
+  static format(json, hotLength) {
     let result = {};
     let vocabulary = {};
-    result.hot = json.suggestions.slice(0, CityPicker.hotLength);
+    result.hot = json.suggestions.slice(0, hotLength);
     result.list = json.suggestions.sort( (a, b) => {
       if (a.py > b.py) {
         return 1;
