@@ -46,6 +46,9 @@ export default class CityPicker {
 
     let el = this.$el = $(template());
     let container = this.container = this.$el.find('.tqb-cp-container');
+    if (CityPicker.fixContainerHeight) {
+      container.height($(window).height() - 65);
+    }
     el.appendTo(document.body);
     setTimeout( () => {
       el.removeClass('out');
