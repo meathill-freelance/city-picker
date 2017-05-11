@@ -5,6 +5,8 @@ A city picker component for 天气宝
 
 这是供天气宝使用的城市选择组件，用在移动设备上。
 
+[GitHub](https://github.com/meathill-freelance/city-picker/)
+
 ## 需求 Requirements
 
 * [jQuery](https://jquery.com) >=3.1.1
