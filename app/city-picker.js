@@ -1,6 +1,7 @@
 import template from '../template/body.hbs';
 import list from '../template/list.hbs';
 import error from '../template/error.hbs';
+import { isSupported } from './utils';
 
 export default class CityPicker {
   constructor(target, options) {
@@ -52,7 +53,7 @@ export default class CityPicker {
     el.appendTo(document.body);
     setTimeout( () => {
       el.removeClass('out');
-    });
+    }, 50);
   }
 
   delegateEvents() {
@@ -62,7 +63,11 @@ export default class CityPicker {
         this.$el.find('.select').removeClass('select');
         let li = $(event.currentTarget);
         li.toggleClass('select');
-        this.target.val(li.text());
+        if (this.target[0].tagName.toLowerCase() === 'label') {
+          this.target.text(li.text());
+        } else {
+          this.target.val(li.text());
+        }
         this.input.val(li.data('id'));
         this.hide();
       })
@@ -117,6 +122,9 @@ export default class CityPicker {
       .on('transitionend', ()=> {
         this.$el.toggleClass('hide', this.$el.hasClass('out'));
       });
+    if (isSupported('position', 'sticky')) {
+      return;
+    }
     this.$el.find('.tqb-cp-container').on('scroll', event => {
       let scrollTop = event.currentTarget.scrollTop;
       let current;
@@ -149,7 +157,7 @@ export default class CityPicker {
       .removeClass('hide');
     setTimeout(() => {
       this.$el.removeClass('out');
-    })
+    }, 50);
   }
 
   hide() {
@@ -184,7 +192,7 @@ export default class CityPicker {
     for (let i = 0, len = result.list.length; i < len; i++) {
       let capital = result.list[i].py.substr(0, 1);
       result.list[i].searchKey = result.list[i].searchKey.split('|').join(' ');
-      if (capital != start) {
+      if (capital !== start) {
         start = capital;
         result.list.splice(i, 0, {
           capital: capital.toUpperCase()
@@ -199,6 +207,9 @@ export default class CityPicker {
   }
 
   static generatePlaceholder(input) {
+    if (input[0].tagName.toLowerCase() === 'label') { // 有可能直接拿 <label> 做显示容器
+      return input[0].control ? $(input[0].control) : $('#' + input.attr('for')) ;
+    }
     let real = document.createElement('input');
     real.type = 'hidden';
     real.name = input.attr('name');

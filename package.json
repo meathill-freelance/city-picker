@@ -1,6 +1,6 @@
 {
   "name": "tqb-component-city-picker",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "a city picker for 天气宝",
   "main": "index.html",
   "scripts": {

@@ -4,7 +4,7 @@
 
 import CityPicker from './city-picker';
 
-$('body').on('click', '.tqb-city-picker-input', event => {
+$('body').on('click', '.tqb-city-picker-input,.tqb-city-picker-label', event => {
   let target = $(event.currentTarget);
   let data = target.data();
   let picker = data.cityPicker;
