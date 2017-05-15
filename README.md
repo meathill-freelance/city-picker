@@ -22,6 +22,8 @@ A city picker component for 天气宝
 |------|------|
 | `url` | 取城市数据的接口地址，默认是当前页面的 `./assets/city.json` |
 | `params` | 传给接口的参数，会直接连在 `url` 的后面 |
+| `hot` | 前多少个为热门城市 |
+| `source` | 全局变量的名称，用来取城市列表的数据，可能由其它 JS 绑定在 `window[source]` 上 |
 
 ### 范例
 

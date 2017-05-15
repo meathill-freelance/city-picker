@@ -19,11 +19,18 @@ export default class CityPicker {
   }
 
   createElement(options) {
-    let url = CityPicker.getDataAPI(options);
-    $.get({
-      url: url,
-      dataType: 'json'
-    })
+    let promise;
+    if ('source' in options && window[options.source]) {
+      promise = $.Deferred();
+      promise.resolve(window[options.source]);
+    } else {
+      let url = CityPicker.getDataAPI(options);
+      promise = $.get({
+        url: url,
+        dataType: 'json'
+      });
+    }
+    promise
       .then( json => {
         json = CityPicker.format(json, options.hot);
         let html = list(json).split('<!-- split -->');
