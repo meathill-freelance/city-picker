@@ -5,7 +5,7 @@ import { isSupported } from './utils';
 
 export default class CityPicker {
   constructor(target, options) {
-    options.hot = options.hot || CityPicker.hotLength;
+    options.hot = 'hot' in options ? options.hot : CityPicker.hotLength;
     this.target = target;
     this.input = CityPicker.generatePlaceholder(target);
     this.createElement(options);
@@ -188,7 +188,7 @@ export default class CityPicker {
   static format(json, hotLength) {
     let result = {};
     let vocabulary = {};
-    result.hot = json.suggestions.slice(0, hotLength);
+    result.hot = hotLength ? json.suggestions.slice(0, hotLength) : false;
     result.list = json.suggestions.sort( (a, b) => {
       if (a.py > b.py) {
         return 1;

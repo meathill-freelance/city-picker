@@ -1,4 +1,5 @@
 <div class="tqb-cp-list">
+  {{#if hot}}
   <div class="hot">
     <h4 class="label">热门</h4>
     <ul>
@@ -7,6 +8,7 @@
       {{/each}}
     </ul>
   </div>
+  {{/if}}
   <ul class="list">
     {{#each list}}
       {{> ./item}}
