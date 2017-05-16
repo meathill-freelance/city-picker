@@ -76,6 +76,9 @@ export default class CityPicker {
           this.target.val(li.text());
         }
         this.input.val(li.data('id'));
+        let e = document.createEvent('HTMLEvents'); // 为了让 Vue 能侦听到事件
+        e.initEvent('change', true, true);
+        this.input[0].dispatchEvent(e);
         this.hide();
       })
       .on('click', '.vocabulary li', event => {
