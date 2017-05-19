@@ -28,7 +28,13 @@ export default class CityPicker {
       promise = $.get({
         url: url,
         dataType: 'json'
-      });
+      })
+        .then( json => { // 因格式问题，可能需要一次转化
+          if ('cityList' in json && !('suggestions' in json)) {
+            json.suggestions = json.cityList;
+          }
+          return json;
+        });
     }
     promise
       .then( json => {
