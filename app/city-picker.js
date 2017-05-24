@@ -246,7 +246,7 @@ export default class CityPicker {
   }
 
   static getDataAPI(options) {
-    let url = options.url || 'http://test.baotianqi.cn/moji/getCitys';
+    let url = options.url || './assets/city.json';
     if ('params' in options) {
       url += '?' + options.params;
     }
