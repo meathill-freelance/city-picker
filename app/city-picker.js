@@ -194,7 +194,15 @@ export default class CityPicker {
   static format(json, hotLength) {
     let result = {};
     let vocabulary = {};
-    result.hot = hotLength ? json.suggestions.slice(0, hotLength) : false;
+    // 先遍历，如果城市属性里包含了热门，那么就以这个为准，否则再截取
+    if (hotLength) {
+      result.hot = json.suggestions.filter( city => {
+        return city.hot === '1';
+      }).slice(0, hotLength);
+      if (result.hot.length === 0) {
+        result.hot = json.suggestions.slice(0, hotLength);
+      }
+    }
     result.list = json.suggestions.sort( (a, b) => {
       if (a.py > b.py) {
         return 1;
@@ -238,7 +246,7 @@ export default class CityPicker {
   }
 
   static getDataAPI(options) {
-    let url = options.url || './assets/city.json';
+    let url = options.url || 'http://test.baotianqi.cn/moji/getCitys';
     if ('params' in options) {
       url += '?' + options.params;
     }

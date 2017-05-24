@@ -57,7 +57,9 @@ gulp.task('stylus', () => {
     .pipe(stylus({
       compress: true
     }))
-    .pipe(cleanCSS())
+    .pipe(cleanCSS({
+      level: 2
+    }))
     .pipe(base64())
     .pipe(rename('tqb-city-picker.min.css'))
     .pipe(gulp.dest(DEST + 'css/'));
