@@ -8,3 +8,4 @@ node_modules
 css/
 dist/
 assets/city.json
+tmp/

@@ -2,11 +2,14 @@
  * Created by meathill on 2017/2/25.
  */
 
-const path =require('path');
+const webpack = require('webpack');
 const config = require('./webpack.config');
+const build = require('./config/build');
 
-config.watch = false;
+config.watch = config.devtool = false;
 config.output.filename = '[name].min.js';
-config.resolve.alias.config = path.resolve(__dirname, './config/build.js');
+config.plugins = [
+  new webpack.DefinePlugin(build)
+];
 
 module.exports = config;

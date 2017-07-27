@@ -161,7 +161,7 @@ export default class CityPicker {
 
   scrollTo(char) {
     let position = this.list.find(`.label.${char}`).position();
-    this.container.scrollTop(position.top);
+    this.container.scrollTop(position.top + 1);
   }
 
   setValue(value) {

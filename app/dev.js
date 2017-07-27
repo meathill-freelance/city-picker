@@ -9,7 +9,8 @@ import template from '../template/body.hbs';
 import list from '../template/list.hbs';
 import errorInfo from '../template/error.hbs';
 import cities from '../assets/city.json';
-import {DEBUG} from 'config';
+
+/* global DEBUG */
 
 if (DEBUG) {
   $.get('./README.md')

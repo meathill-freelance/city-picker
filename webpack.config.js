@@ -2,6 +2,8 @@
  * Created by realm on 2017/2/21.
  */
 const path = require('path');
+const webpack = require('webpack');
+const dev = require('./config/dev');
 
 module.exports = {
   entry: {
@@ -22,21 +24,16 @@ module.exports = {
       {
         test: /\.hbs$/,
         loader: 'handlebars-loader'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       }
     ]
   },
+  devtool: "source-map",
   watch: true,
   watchOptions: {
-    ignored: /node_modules|dist/,
+    ignored: /node_modules|dist|styl|css|docs|img/,
     poll: 1000
   },
-  resolve: {
-    alias: {
-      config: path.resolve(__dirname, './config/dev.js')
-    }
-  }
+  plugins: [
+    new webpack.DefinePlugin(dev)
+  ]
 };

@@ -9,7 +9,8 @@ const stylus = require('gulp-stylus');
 const cleanCSS = require('gulp-clean-css');
 const rename = require('gulp-rename');
 const base64 = require('gulp-base64');
-const webpack = require('gulp-webpack');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
 const uglify = require('gulp-uglify');
 const replace = require('gulp-replace');
 const event = require('event-stream');
@@ -67,7 +68,7 @@ gulp.task('stylus', () => {
 
 gulp.task('webpack', () => {
   return gulp.src('./app/main.js')
-    .pipe(webpack(require('./webpack.config.build')))
+    .pipe(webpackStream(require('./webpack.config.build'), webpack))
     .pipe(uglify())
     .pipe(gulp.dest(DEST + 'js/'));
 });
