@@ -1,6 +1,6 @@
 {
   "name": "tqb-component-city-picker",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "a city picker for 天气宝",
   "main": "index.html",
   "scripts": {
@@ -17,7 +17,7 @@
     "city-picker"
   ],
   "author": "Meathill <meathill@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/meathill-freelance/city-picker/issues"
   },
