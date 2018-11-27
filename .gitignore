@@ -5,7 +5,7 @@
 node_modules
 
 # build
-css/
+/css/
 dist/
 assets/city.json
 tmp/
