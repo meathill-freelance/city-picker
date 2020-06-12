@@ -23,17 +23,17 @@
   },
   "homepage": "https://meathill-freelance.github.io/city-picker/",
   "devDependencies": {
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^4.5.0",
     "colors.css": "^3.0.0",
     "gulp": "^4.0.2",
     "gulp-uglify": "^3.0.2",
-    "handlebars": "^4.5.3",
+    "handlebars": "^4.7.6",
     "handlebars-loader": "^1.7.1",
-    "jquery": "^3.4.1",
-    "marked": "^0.8.0",
-    "mocha": "^6.2.2",
+    "jquery": "^3.5.1",
+    "marked": "^1.1.0",
+    "mocha": "^8.0.1",
     "should": "^13.2.3",
-    "webpack": "^4.41.3",
-    "webpack-cli": "^3.3.10"
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
